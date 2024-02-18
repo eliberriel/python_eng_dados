@@ -1,0 +1,54 @@
+# Tarefa Aula 04
+
+# Exercício 1) Criar algoritmo que liste toda a sequência de Fibonacci até o número 100###########################################################
+
+# função fibo recebe um parâmetro que será o limite final
+def fibo(n):
+    a = 0
+    b = 1
+    sequencia = [0, 1]
+    
+    for i in range(n):
+        x = b
+        y = a + b
+        a = x
+        b = y
+        if(b <= n):
+            sequencia.append(b)
+        else:
+            break
+        
+    return sequencia
+
+fibo(100)
+
+# Exercício 2) Criar algoritmo que faça a fatoração do número 1024. ##############################################################################
+
+def fatorial(n):
+    a = n 
+    b = 1
+    
+    while a >= 1:
+        b = b * a
+        a = a - 1
+    return b
+
+fatorial(1024)
+
+# Exercício 3) Criar uma lista de frutas (bananas, maçãs, peras, uvas, laranjas) e fazer um algoritmo para consultar se uma fruta existe na lista. 
+# Caso não exista, adicionar a nova fruta. O programa só deve encerrar a brincadeira quando o usuário informar o número 999 #######################
+
+frutas = ['banana', 'maça', 'pera', 'uva', 'laranja']
+
+def consulta(nova_fruta):
+    if isinstance(nova_fruta, str):
+        if nova_fruta in frutas:
+            print(nova_fruta,"já está presenta na lista")
+        else: 
+            frutas.append(nova_fruta)
+            print("lista atualizada:",frutas)
+    else: print("tipo informado não é uma fruta")
+    
+consulta("banana")
+consulta("morango")
+consulta(999)
