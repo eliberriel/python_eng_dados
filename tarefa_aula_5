@@ -1,0 +1,33 @@
+# tarefa aula 05
+"""
+Fazer download do dataset Top Youtube Artists, do Kaggle. 
+Tratar as colunas sem informação adicionando o texto “Não informado”.
+Formatar a coluna de total de inscritos multiplicando por 100 milhões.
+Formatar coluna “AVG” para 2 casas decimais depois da vírgula.
+Mostrar os top 10 usuários.
+Mostrar primeiros 100 usuários por nome decrescente.
+Salvar um novo CSV com a informação tratada.
+"""
+
+import pandas as pd
+
+df = pd.read_csv('./arquivos/topyoutube.csv')
+
+# Convertendo colunas NaN para "Não informado"
+df = df.fillna("Não informado") 
+
+# Formatar a coluna de total de inscritos multiplicando por 100 milhões
+df['Total Views'] = df['Total Views'].apply(lambda valor: float(valor.replace(",", "")))
+df['Total Views'] = df['Total Views']*100000000
+
+# Formatar coluna “AVG” para 2 casas decimais depois da vírgula.
+df['Avg'] = df['Avg'].apply(lambda valor: "{:.2f}".format(valor))
+
+# Mostrar os top 10 usuários
+df.nlargest(10, "Total Views")
+
+# Mostrar primeiros 100 usuários por nome decrescente
+df.sort_values(by="Artist", ascending=False).head(100)
+
+# Salvar um novo CSV com a informação tratada
+df.to_csv("./arquivos/topyoutube_tratado.csv")
